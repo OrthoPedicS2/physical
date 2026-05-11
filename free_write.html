@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기 | 자유게시판</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .write-wrap { padding: 150px 0; background: #fcfcfc; min-height: 100vh; }
+        .write-form { background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: var(--deep-charcoal); }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        .form-group textarea { height: 300px; resize: none; }
+        .help-text { font-size: 0.8rem; color: #cc0000; margin-top: 5px; }
+        .btn-area { text-align: center; margin-top: 40px; display: flex; gap: 15px; justify-content: center; }
+        .btn-save { background: var(--primary-blue); color: #fff; border: none; padding: 15px 50px; border-radius: 30px; font-weight: 700; cursor: pointer; }
+        .btn-cancel { background: #eee; color: #666; border: none; padding: 15px 50px; border-radius: 30px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header id="header" class="scrolled">
+        <nav class="container">
+            <div class="logo"><a href="index.html">NEXT-<span>PHYSICAL AI</span></a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html#technology">회사소개</a></li>
+                <li><a href="index.html#business">사업분야</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li class="dropdown">
+                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="inquiry_board.html">문의게시판</a></li>
+                        <li><a href="free_board.html">자유게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="write-wrap">
+        <div class="container">
+            <div class="write-form">
+                <h2 style="margin-bottom: 30px; text-align: center;">자유게시판 글쓰기</h2>
+                <form id="freeWriteForm">
+                    <div class="form-group">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" required placeholder="제목을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">작성자 이름</label>
+                        <input type="text" id="author" required placeholder="이름을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">내용</label>
+                        <textarea id="content" required placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" required placeholder="숫자만 입력">
+                        <p class="help-text">* 8자리 이상의 숫자만 입력 가능합니다.</p>
+                    </div>
+                    <div class="btn-area">
+                        <button type="button" class="btn-cancel" onclick="location.href='free_board.html'">취소</button>
+                        <button type="submit" class="btn-save">저장하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, getDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLfjV2TSMd1FVtAw7NyfgRI7zwWeE8KwM",
+            authDomain: "physical-3821d.firebaseapp.com",
+            databaseURL: "https://physical-3821d-default-rtdb.firebaseio.com",
+            projectId: "physical-3821d",
+            storageBucket: "physical-3821d.firebasestorage.app",
+            messagingSenderId: "438825058706",
+            appId: "1:438825058706:web:a2bc6f6473a5d44072c14b",
+            measurementId: "G-DE14LWWXLD"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+
+        // 수정 모드일 경우 기존 데이터 불러오기
+        if (postId) {
+            document.querySelector('h2').innerText = '자유게시판 글 수정';
+            const loadData = async () => {
+                const docSnap = await getDoc(doc(db, "free_board", postId));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('title').value = data.title;
+                    document.getElementById('author').value = data.author;
+                    document.getElementById('content').value = data.content;
+                    // 비밀번호는 보안상 불러오지 않거나 별도 처리
+                }
+            };
+            loadData();
+        }
+
+        document.getElementById('freeWriteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const content = document.getElementById('content').value;
+            const password = document.getElementById('password').value;
+
+            const passwordRegex = /^\d{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert('비밀번호는 8자리 이상의 숫자여야 합니다.');
+                return;
+            }
+
+            try {
+                if (postId) {
+                    // 수정 로직
+                    const docRef = doc(db, "free_board", postId);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.data().password !== password) {
+                        alert('비밀번호가 일치하지 않습니다.');
+                        return;
+                    }
+                    await updateDoc(docRef, {
+                        title: title,
+                        author: author,
+                        content: content,
+                        updatedAt: serverTimestamp()
+                    });
+                    alert('수정되었습니다.');
+                } else {
+                    // 새 글 작성 로직
+                    await addDoc(collection(db, "free_board"), {
+                        title: title,
+                        author: author,
+                        content: content,
+                        password: password,
+                        createdAt: serverTimestamp(),
+                        views: 0
+                    });
+                    alert('성공적으로 저장되었습니다.');
+                }
+                location.href = 'free_board.html';
+            } catch (err) {
+                console.error(err);
+                alert('처리 중 오류가 발생했습니다.');
+            }
+        });
+    </script>
+</body>
+</html>

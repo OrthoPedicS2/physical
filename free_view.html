@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글보기 | 자유게시판</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .view-wrap { padding: 150px 0; background: #fcfcfc; min-height: 100vh; }
+        .view-content { background: #fff; padding: 50px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 900px; margin: 0 auto; }
+        .view-header { border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+        .view-header h2 { font-size: 2rem; margin-bottom: 15px; }
+        .view-meta { color: #888; font-size: 0.9rem; display: flex; gap: 20px; }
+        .view-body { min-height: 300px; line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; margin-bottom: 50px; }
+        .btn-area { display: flex; gap: 15px; justify-content: center; padding-top: 30px; border-top: 1px solid #eee; }
+        .btn-action { padding: 12px 30px; border-radius: 25px; font-weight: 700; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-list { background: #eee; color: #666; }
+        .btn-edit { background: var(--primary-blue); color: #fff; }
+        .btn-delete { background: #ff4d4d; color: #fff; }
+        
+        /* Modal for password check */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; padding: 30px; border-radius: 10px; text-align: center; width: 350px; }
+        .modal-content input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <header id="header" class="scrolled">
+        <nav class="container">
+            <div class="logo"><a href="index.html">NEXT-<span>PHYSICAL AI</span></a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html#technology">회사소개</a></li>
+                <li><a href="index.html#business">사업분야</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li class="dropdown">
+                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="inquiry_board.html">문의게시판</a></li>
+                        <li><a href="free_board.html">자유게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="view-wrap">
+        <div class="container">
+            <div class="view-content">
+                <div id="loading">로딩 중...</div>
+                <div id="postContent" style="display: none;">
+                    <div class="view-header">
+                        <h2 id="viewTitle">제목이 들어갑니다.</h2>
+                        <div class="view-meta">
+                            <span id="viewAuthor">작성자: 홍길동</span>
+                            <span id="viewDate">날짜: 2026-05-11</span>
+                        </div>
+                    </div>
+                    <div class="view-body" id="viewBody">
+                        내용이 들어갑니다.
+                    </div>
+                    <div class="btn-area">
+                        <button class="btn-action btn-list" onclick="location.href='free_board.html'">목록으로</button>
+                        <button class="btn-action btn-edit" id="editBtn">수정</button>
+                        <button class="btn-action btn-delete" id="deleteBtn">삭제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Password Modal -->
+    <div id="pwdModal" class="modal">
+        <div class="modal-content">
+            <h3>비밀번호 확인</h3>
+            <p>글을 수정하거나 삭제하려면 비밀번호가 필요합니다.</p>
+            <input type="password" id="inputPwd" placeholder="비밀번호 입력">
+            <div style="display: flex; gap: 10px;">
+                <button id="pwdCancel" style="flex:1; padding: 10px;">취소</button>
+                <button id="pwdConfirm" style="flex:1; padding: 10px; background: var(--primary-blue); color: #fff; border: none;">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLfjV2TSMd1FVtAw7NyfgRI7zwWeE8KwM",
+            authDomain: "physical-3821d.firebaseapp.com",
+            databaseURL: "https://physical-3821d-default-rtdb.firebaseio.com",
+            projectId: "physical-3821d",
+            storageBucket: "physical-3821d.firebasestorage.app",
+            messagingSenderId: "438825058706",
+            appId: "1:438825058706:web:a2bc6f6473a5d44072c14b",
+            measurementId: "G-DE14LWWXLD"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+
+        if (!postId) {
+            alert('잘못된 접근입니다.');
+            location.href = 'free_board.html';
+        }
+
+        let currentPost = null;
+
+        async function loadPost() {
+            const docRef = doc(db, "free_board", postId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                currentPost = docSnap.data();
+                document.getElementById('viewTitle').innerText = currentPost.title;
+                document.getElementById('viewAuthor').innerText = `작성자: ${currentPost.author}`;
+                document.getElementById('viewDate').innerText = `날짜: ${currentPost.createdAt.toDate().toLocaleDateString()}`;
+                document.getElementById('viewBody').innerText = currentPost.content;
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('postContent').style.display = 'block';
+            } else {
+                alert('삭제되었거나 존재하지 않는 글입니다.');
+                location.href = 'free_board.html';
+            }
+        }
+
+        loadPost();
+
+        const pwdModal = document.getElementById('pwdModal');
+        let actionTarget = '';
+
+        document.getElementById('editBtn').onclick = () => {
+            actionTarget = 'edit';
+            pwdModal.style.display = 'flex';
+        };
+
+        document.getElementById('deleteBtn').onclick = () => {
+            actionTarget = 'delete';
+            pwdModal.style.display = 'flex';
+        };
+
+        document.getElementById('pwdCancel').onclick = () => {
+            pwdModal.style.display = 'none';
+        };
+
+        document.getElementById('pwdConfirm').onclick = async () => {
+            const inputPwd = document.getElementById('inputPwd').value;
+            if (inputPwd === currentPost.password) {
+                if (actionTarget === 'delete') {
+                    if (confirm('정말로 삭제하시겠습니까?')) {
+                        await deleteDoc(doc(db, "free_board", postId));
+                        alert('삭제되었습니다.');
+                        location.href = 'free_board.html';
+                    }
+                } else {
+                    // 수정 페이지로 이동 (ID와 함께)
+                    location.href = `free_write.html?id=${postId}`;
+                }
+            } else {
+                alert('비밀번호가 일치하지 않습니다.');
+            }
+        };
+    </script>
+</body>
+</html>

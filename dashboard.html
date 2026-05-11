@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Core Dashboard | Real-time Physical AI Data</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            padding: 120px 20px 60px;
+            background-color: var(--deep-charcoal);
+            min-height: 100vh;
+            color: var(--white);
+        }
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .db-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        .db-card h3 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+        canvas {
+            width: 100% !important;
+            height: 200px !important;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="scrolled">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html">NEXT-<span>PHYSICAL AI</span></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#technology">회사소개</a></li>
+                <li><a href="index.html#business">사업분야</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li class="dropdown">
+                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="inquiry_board.html">문의게시판</a></li>
+                        <li><a href="free_board.html">자유게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <div class="db-header">
+                <h2>Antigravity Core <span class="status-badge">Live System Active</span></h2>
+                <p>Physical AI 실시간 센서 데이터 및 시뮬레이션 분석</p>
+            </div>
+            
+            <div class="db-grid">
+                <div class="db-card">
+                    <h3>로봇 관절 토크 (Robot Joint Torque)</h3>
+                    <canvas id="jointChart"></canvas>
+                </div>
+                <div class="db-card">
+                    <h3>주행 경로 정밀도 (Path Accuracy)</h3>
+                    <canvas id="pathChart"></canvas>
+                </div>
+                <div class="db-card">
+                    <h3>환경 인지 데이터 (Perception Confidence)</h3>
+                    <canvas id="percChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data visualization
+        const ctx1 = document.getElementById('jointChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['1s', '2s', '3s', '4s', '5s', '6s'],
+                datasets: [{
+                    label: 'Torque (Nm)',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderColor: '#0047AB',
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+
+        const ctx2 = document.getElementById('pathChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['X', 'Y', 'Z'],
+                datasets: [{
+                    label: 'Error (mm)',
+                    data: [0.5, 0.2, 0.8],
+                    backgroundColor: '#007BFF'
+                }]
+            }
+        });
+
+        const ctx3 = document.getElementById('percChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['Recognized', 'Unknown'],
+                datasets: [{
+                    data: [98, 2],
+                    backgroundColor: ['#0047AB', '#4A4A4A']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

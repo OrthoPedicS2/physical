@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 | Next-Physical AI Dynamics</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .mypage-wrap { padding: 150px 0; background: #fcfcfc; min-height: 100vh; }
+        .mypage-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; }
+        .mypage-sidebar { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .sidebar-menu { list-style: none; margin-top: 30px; }
+        .sidebar-menu li { margin-bottom: 15px; }
+        .sidebar-menu a { display: block; padding: 12px 20px; border-radius: 10px; font-weight: 600; color: #666; transition: 0.3s; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: var(--primary-blue); color: #fff; }
+        
+        .mypage-content { background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .info-group { margin-bottom: 30px; }
+        .info-group h3 { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .info-row { display: flex; padding: 15px 0; border-bottom: 1px dotted #eee; }
+        .info-label { width: 150px; font-weight: 700; color: #333; }
+    </style>
+</head>
+<body>
+    <header id="header" class="scrolled">
+        <nav class="container">
+            <div class="logo"><a href="index.html">NEXT-<span>PHYSICAL AI</span></a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html#technology">회사소개</a></li>
+                <li><a href="index.html#business">사업분야</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li class="dropdown">
+                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="inquiry_board.html">문의게시판</a></li>
+                        <li><a href="free_board.html">자유게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mypage-wrap">
+        <div class="container">
+            <div class="mypage-grid">
+                <aside class="mypage-sidebar reveal-left">
+                    <div class="user-profile-card" style="box-shadow: none; padding: 0;">
+                        <div class="profile-img"><i class="fas fa-user-circle"></i></div>
+                        <div class="profile-info">
+                            <h4>방문객님</h4>
+                            <p>Premium Member</p>
+                        </div>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active">나의 정보 수정</a></li>
+                        <li><a href="#">내 게시글 관리</a></li>
+                        <li><a href="#">문의 내역</a></li>
+                        <li><a href="index.html">로그아웃</a></li>
+                    </ul>
+                </aside>
+                
+                <section class="mypage-content reveal-right">
+                    <div class="info-group">
+                        <h3>계정 정보</h3>
+                        <div class="info-row">
+                            <div class="info-label">아이디</div>
+                            <div class="info-value">visitor_ai</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">이름</div>
+                            <div class="info-value">방문객</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">이메일</div>
+                            <div class="info-value">visitor@example.com</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>활동 내역</h3>
+                        <div class="info-row">
+                            <div class="info-label">자유게시판 작성글</div>
+                            <div class="info-value">2개</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">최근 접속일</div>
+                            <div class="info-value">2026-05-11 12:28</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
