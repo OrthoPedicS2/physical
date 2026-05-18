@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사소개 | PrimeFix</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #0c0e12; 
+            color: #ffffff; 
+            margin: 0;
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(12, 14, 18, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .about-hero {
+            padding: 15rem 2rem 10rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .category-tag {
+            display: inline-block;
+            color: #3b82f6;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .company-name {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -4px;
+            margin-bottom: 5rem;
+            background: linear-gradient(to bottom, #ffffff, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .info-section {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 4rem;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-label {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-body {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: #e2e8f0;
+        }
+
+        .purpose-highlight {
+            color: #3b82f6;
+            font-weight: 900;
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 991px) {
+            .info-section { grid-template-columns: 1fr; gap: 1.5rem; }
+            .about-hero { padding-top: 10rem; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html">Prime<span>Fix</span></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="maintenance.html">회사소개</a></li>
+                <li class="dropdown">
+                    <a href="business.html">사업분야 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="business.html#smart-factory">스마트팩토리 구축</a></li>
+                        <li><a href="business.html#preventive">예방 정비</a></li>
+                        <li><a href="business.html#control">로봇관제</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#maintenance">유지보수</a></li>
+                <li class="dropdown">
+                    <a href="ir.html">투자정보 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ir.html#highlights">재무 하이라이트</a></li>
+                        <li><a href="ir.html#stock">주가정보</a></li>
+                        <li><a href="ir.html#disclosure">전자공시</a></li>
+                        <li><a href="ir.html#archive">IR 자료실</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#news">뉴스룸</a></li>
+                <li class="dropdown">
+                    <a href="#">고객지원 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="inquiry_board.html">문의게시판</a></li>
+                        <li><a href="free_board.html">자유게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="header-right">
+                <div class="user-links">
+                    <a href="login.html">로그인</a>
+                    <a href="mypage.html">나의 정보</a>
+                </div>
+                <span class="lang">KO | EN</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-hero">
+        <div class="fade-in">
+            <span class="category-tag">Innovative Future</span>
+            <h1 class="company-name">PrimeFix <br>Dynamics</h1>
+
+            <div class="info-section">
+                <div class="info-label">Core Business</div>
+                <div class="info-body">
+                    지능형 Physical AI 및 첨단 로보틱스 솔루션 개발을 통해 <br>
+                    전 세계 산업의 디지털 트랜스포메이션을 선도합니다.
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Main Purpose</div>
+                <div class="info-body purpose-highlight">
+                    "기술을 통해 인간의 삶을 더 안전하고 <br>
+                    효율적으로 풍요롭게 만드는 것."
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Future Vision</div>
+                <div class="info-body" style="color: #94a3b8; font-size: 1.5rem; font-weight: 500;">
+                    단순한 자동화를 넘어, 기계가 인간을 깊이 이해하고 조화롭게 협력하는 초지능형 물리 생태계를 구축합니다.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="padding: 5rem 0; background: #080a0d; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container text-center">
+            <p style="color: #475569;">&copy; 2026 PrimeFix. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

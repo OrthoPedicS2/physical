@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로봇관제 | PrimeFix</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0c0e12; color: white; }
+        .detail-hero { padding: 10rem 2rem 5rem; background: linear-gradient(rgba(12,14,18,0.8), rgba(12,14,18,1)), url('assets/images/biz_control.png'); background-size: cover; background-position: center; text-align: center; }
+        .detail-hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 2rem; background: linear-gradient(to bottom, #ffffff, #64748b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .content-section { max-width: 1000px; margin: 5rem auto; padding: 0 2rem; line-height: 1.8; }
+        .content-section h2 { font-size: 2.5rem; margin-bottom: 2rem; color: #3b82f6; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+        .feature-card { background: rgba(255,255,255,0.03); padding: 2.5rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.05); }
+        .feature-card i { font-size: 2.5rem; color: #3b82f6; margin-bottom: 1.5rem; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .feature-card p { color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <header id="header" style="background: rgba(12,14,18,0.9); backdrop-filter: blur(10px);">
+        <nav class="container">
+            <div class="logo"><a href="index.html">Prime<span>Fix</span></a></div>
+            <ul class="nav-menu">
+                <li><a href="maintenance.html">회사소개</a></li>
+                <li class="dropdown">
+                    <a href="business.html">사업분야 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="smart-factory.html">스마트팩토리 구축</a></li>
+                        <li><a href="preventive-maintenance.html">예방 정비</a></li>
+                        <li><a href="robot-control.html">로봇관제</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#maintenance">유지보수</a></li>
+                <li class="dropdown">
+                    <a href="ir.html">투자정보 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ir.html#highlights">재무 하이라이트</a></li>
+                        <li><a href="ir.html#stock">주가정보</a></li>
+                        <li><a href="ir.html#disclosure">전자공시</a></li>
+                        <li><a href="ir.html#archive">IR 자료실</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#news">뉴스룸</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-hero">
+            <div class="container">
+                <span style="color: #3b82f6; font-weight: 700; letter-spacing: 0.2rem; text-transform: uppercase;">Central Command Center</span>
+                <h1>로봇관제</h1>
+                <p style="font-size: 1.25rem; color: #94a3b8; max-width: 800px; margin: 0 auto;">모든 로봇을 한눈에. 실시간 통합 관제로 운영의 효율을 완성합니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>지능형 로봇 함대 관리 시스템</h2>
+            <p>로봇의 수가 많아질수록 체계적인 관리가 필수적입니다. PrimeFix의 로봇관제 솔루션은 현장에 직접 가지 않고도 모든 로봇의 상태를 중앙에서 제어하고, 돌발 상황 발생 시 즉각 대응할 수 있는 관제 기술을 제공합니다.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>실시간 통합 대시보드</h3>
+                    <p>공장 내의 모든 로봇의 에러 코드, 작업 진행도, 배터리 상태 등을 단일 화면에서 실시간으로 확인할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-satellite"></i>
+                    <h3>원격 정밀 제어</h3>
+                    <p>로봇에 문제가 생겼을 때 숙련된 엔지니어가 원격으로 직접 접속하여 소프트웨어 오류를 진단하고 해결합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>안전 충돌 방지 관제</h3>
+                    <p>로봇 간, 혹은 사람과의 충돌 위험을 AI가 예측하여 이동 경로를 자동으로 재설계하는 최상위 안전 관제를 수행합니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 5rem 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+        <p style="color: #475569;">&copy; 2026 PrimeFix Dynamics. All rights reserved.</p>
+    </footer>
+</body>
+</html>

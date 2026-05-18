@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스룸 | PrimeFix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .news-card:hover img { transform: scale(1.1); }
+        #mobile-menu { display: none; }
+        #mobile-menu.active { display: block; }
+    </style>
+</head>
+<body class="bg-[#f8fafc]">
+    <!-- GNB -->
+    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md z-[1000] border-b border-slate-100" style="all: unset; position: fixed; top: 0; left: 0; width: 100%; height: 96px; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;">
+        <nav class="max-w-[1440px] mx-auto px-10 h-full flex justify-between items-center relative z-20" style="display: flex; height: 100%; align-items: center; justify-content: space-between;">
+            <div class="text-2xl font-black tracking-tighter shrink-0">
+                <a href="index.html" class="text-slate-900 hover:text-blue-600 transition-colors" style="display: flex; align-items: center;">PRIME<span class="text-blue-600">FIX</span></a>
+            </div>
+            
+            <ul class="hidden lg:flex items-center gap-12 xl:gap-16 font-bold text-[1rem] text-slate-800" style="display: flex; align-items: center; list-style: none;">
+                <li class="relative group py-8">
+                    <a href="business.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">사업분야 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-48 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="smart-factory.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">스마트팩토리 구축</a>
+                        <a href="preventive-maintenance.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">예방 정비</a>
+                        <a href="robot-control.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">로봇관제</a>
+                    </div>
+                </li>
+                <li><a href="maintenance.html" class="hover:text-blue-600 transition-colors">유지보수</a></li>
+                <li><a href="ir.html" class="hover:text-blue-600 transition-colors">투자정보</a></li>
+                <li><a href="newsroom.html" class="text-blue-600 border-b-2 border-blue-600">뉴스룸</a></li>
+                <li class="relative group py-8">
+                    <a href="#" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">고객지원 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-40 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="inquiry_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">문의게시판</a>
+                        <a href="free_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">자유게시판</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-8 relative z-30" style="display: flex; align-items: center;">
+                <div class="hidden lg:flex items-center gap-6 font-bold text-[0.9rem] text-slate-600" style="display: flex; align-items: center;">
+                    <a href="login.html" class="hover:text-blue-600 transition-colors">로그인</a>
+                    <a href="mypage.html" class="hover:text-blue-600 transition-colors">나의 정보</a>
+                    <div class="w-[1px] h-3 bg-slate-200"></div>
+                    <div class="flex items-center gap-2" style="display: flex; align-items: center;">
+                        <span class="text-blue-600 cursor-pointer">KO</span>
+                        <span class="text-slate-200 text-[10px]">|</span>
+                        <span class="text-slate-400 font-medium cursor-pointer hover:text-slate-600">EN</span>
+                    </div>
+                </div>
+                <button id="menu-btn" class="lg:hidden text-2xl outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-10 flex flex-col gap-6 font-bold text-slate-800">
+            <a href="business.html">사업분야</a>
+            <a href="maintenance.html">유지보수</a>
+            <a href="ir.html">투자정보</a>
+            <a href="newsroom.html">뉴스룸</a>
+            <a href="#">고객지원</a>
+            <hr class="border-slate-100">
+            <a href="login.html">로그인</a>
+            <a href="mypage.html">나의 정보</a>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24">
+        <div class="max-w-[1440px] mx-auto px-10">
+            <div class="mb-16">
+                <p class="text-blue-600 font-bold tracking-widest text-sm mb-4">LATEST INSIGHTS</p>
+                <h1 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">뉴스룸</h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- News Card 1 -->
+                <div class="news-card bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="images/news_ai_robot.png" class="w-full h-full object-cover transition-transform duration-500">
+                        <span class="absolute top-6 left-6 bg-white/90 px-4 py-1.5 rounded-full text-[10px] font-black">주요뉴스</span>
+                    </div>
+                    <div class="p-10">
+                        <p class="text-blue-600 text-xs font-bold mb-4">2026.05.18</p>
+                        <h3 class="text-xl font-bold mb-4">PrimeFix, 차세대 AI 로봇 제어 솔루션 대규모 수주 성공</h3>
+                        <p class="text-slate-500 text-sm line-clamp-2">글로벌 자동차 제조사와 500억 규모의 스마트 팩토리 제어 시스템 공급 계약을 체결했습니다.</p>
+                    </div>
+                </div>
+                <!-- News Card 2 -->
+                <div class="news-card bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="images/news_exhibition.png" class="w-full h-full object-cover transition-transform duration-500">
+                        <span class="absolute top-6 left-6 bg-white/90 px-4 py-1.5 rounded-full text-[10px] font-black">보도자료</span>
+                    </div>
+                    <div class="p-10">
+                        <p class="text-blue-600 text-xs font-bold mb-4">2026.05.15</p>
+                        <h3 class="text-xl font-bold mb-4">2026 로보월드 박람회 참가, 미래형 유지보수 플랫폼 공개</h3>
+                        <p class="text-slate-500 text-sm line-clamp-2">현장에서 원격으로 진단하고 수리하는 'Prime-Remote' 기술을 선보였습니다.</p>
+                    </div>
+                </div>
+                <!-- News Card 3 -->
+                <div class="news-card bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="images/news_team.png" class="w-full h-full object-cover transition-transform duration-500">
+                        <span class="absolute top-6 left-6 bg-white/90 px-4 py-1.5 rounded-full text-[10px] font-black">스토리</span>
+                    </div>
+                    <div class="p-10">
+                        <p class="text-blue-600 text-xs font-bold mb-4">2026.05.10</p>
+                        <h3 class="text-xl font-bold mb-4">기술 그 이상의 가치, PrimeFix 엔지니어링 팀 인터뷰</h3>
+                        <p class="text-slate-500 text-sm line-clamp-2">멈춤 없는 혁신을 만드는 사람들의 이야기. 현장에서 땀 흘리는 엔지니어 사레.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Press Recruitment -->
+            <div class="mt-24 bg-slate-900 rounded-[3rem] p-10 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div class="text-center lg:text-left">
+                    <h2 class="text-2xl md:text-3xl font-black text-white mb-4">PRIME<span class="text-blue-400">FIX</span> 기자단 모집</h2>
+                    <p class="text-slate-400 text-sm md:text-base">PRIMEFIX의 혁신적인 기술과 소식을 생생하게 전달할 기자단을 찾습니다.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="inquiry_board.html" class="bg-blue-600 text-white px-12 py-5 rounded-full font-black whitespace-nowrap text-center hover:bg-blue-700 transition-colors">기자단 신청하기</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 bg-gray-100 text-center text-gray-500 text-sm">
+        <p>© 2026 PrimeFix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+    </script>
+</body>
+</html>

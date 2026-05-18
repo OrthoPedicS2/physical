@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유지보수 서비스 | PrimeFix</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0c0e12; color: white; margin: 0; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+        
+        .maintenance-video-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 100px 20px;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(2px);
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .headline {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 4rem;
+            line-height: 1.1;
+        }
+
+        .headline span { color: #3b82f6; }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .step-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .step-box:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            transition: transform 0.6s ease;
+        }
+
+        .step-box:hover .step-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            float: right;
+            margin-top: -20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            word-break: keep-all;
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .cta-container {
+            margin-top: 60px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .steps-grid { grid-template-columns: 1fr; }
+            .headline { margin-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <style>
+        /* ... existing styles ... */
+        .dropdown-menu {
+            background: #1a1d23 !important;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .dropdown-menu li a {
+            color: #e2e8f0 !important;
+        }
+        .dropdown-menu li a:hover {
+            color: #3b82f6 !important;
+            background: rgba(59, 130, 246, 0.1) !important;
+        }
+        .nav-toggle { display: none; color: white; cursor: pointer; font-size: 1.5rem; }
+        @media (max-width: 991px) {
+            .nav-menu { display: none; }
+    </style>
+</head>
+<body>
+    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md z-[1000] border-b border-slate-100" style="all: unset; position: fixed; top: 0; left: 0; width: 100%; height: 96px; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;">
+        <nav class="max-w-[1440px] mx-auto px-10 h-full flex justify-between items-center relative z-20" style="display: flex; height: 100%; align-items: center; justify-content: space-between;">
+            <div class="text-2xl font-black tracking-tighter shrink-0">
+                <a href="index.html" class="text-slate-900 hover:text-blue-600 transition-colors" style="display: flex; align-items: center;">PRIME<span class="text-blue-600">FIX</span></a>
+            </div>
+            
+            <ul class="hidden lg:flex items-center gap-12 xl:gap-16 font-bold text-[1rem] text-slate-800" style="display: flex; align-items: center; list-style: none;">
+                <li class="relative group py-8">
+                    <a href="business.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">사업분야 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-48 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="smart-factory.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">스마트팩토리 구축</a>
+                        <a href="preventive-maintenance.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">예방 정비</a>
+                        <a href="robot-control.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">로봇관제</a>
+                    </div>
+                </li>
+                <li><a href="maintenance.html" class="text-blue-600 border-b-2 border-blue-600">유지보수</a></li>
+                <li><a href="ir.html" class="hover:text-blue-600 transition-colors">투자정보</a></li>
+                <li><a href="newsroom.html" class="hover:text-blue-600 transition-colors">뉴스룸</a></li>
+                <li class="relative group py-8">
+                    <a href="#" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">고객지원 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-40 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="inquiry_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">문의게시판</a>
+                        <a href="free_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">자유게시판</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-8 relative z-30" style="display: flex; align-items: center;">
+                <div class="hidden lg:flex items-center gap-6 font-bold text-[0.9rem] text-slate-600" style="display: flex; align-items: center;">
+                    <a href="login.html" class="hover:text-blue-600 transition-colors">로그인</a>
+                    <a href="mypage.html" class="hover:text-blue-600 transition-colors">나의 정보</a>
+                    <div class="w-[1px] h-3 bg-slate-200"></div>
+                    <div class="flex items-center gap-2" style="display: flex; align-items: center;">
+                        <span class="text-blue-600 cursor-pointer">KO</span>
+                        <span class="text-slate-200 text-[10px]">|</span>
+                        <span class="text-slate-400 font-medium cursor-pointer hover:text-slate-600">EN</span>
+                    </div>
+                </div>
+                <button id="menu-btn" class="lg:hidden text-2xl text-slate-900 outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-10 flex-col gap-6 font-bold text-slate-800">
+            <a href="business.html">사업분야</a>
+            <a href="maintenance.html">유지보수</a>
+            <a href="ir.html">투자정보</a>
+            <a href="newsroom.html">뉴스룸</a>
+            <a href="#">고객지원</a>
+            <hr class="border-slate-100">
+            <a href="login.html">로그인</a>
+            <a href="mypage.html">나의 정보</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="maintenance-video-section">
+            <div class="video-bg">
+                <video autoplay loop muted playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-working-on-a-circuit-board-43231-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-overlay"></div>
+
+            <div class="content-wrapper">
+                <h2 class="headline">멈춤 없는 혁신, <br><span>PrimeFix가 증명합니다</span></h2>
+                
+                <div class="steps-grid">
+                    <div class="step-box">
+                        <span class="step-number">01</span>
+                        <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <h3 class="step-title">장애 접수 및 원격 진단</h3>
+                        <p class="step-desc">실시간 로그 분석 및 에러 코드를 확인하여 문제의 핵심을 신속하게 파악합니다.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">02</span>
+                        <div class="step-icon"><i class="fas fa-truck"></i></div>
+                        <h3 class="step-title">현장 출동 및 정밀 분석</h3>
+                        <p class="step-desc">정규 엔지니어가 즉시 현장에 투입되어 PLC 시퀀스 및 하드웨어 점검을 수행합니다.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">03</span>
+                        <div class="step-icon"><i class="fas fa-tools"></i></div>
+                        <h3 class="step-title">수리 및 맞춤형 가공</h3>
+                        <p class="step-desc">프로그램 로직 수정은 물론, 단종된 파이프나 부품의 정밀 역설계 및 가공 수리를 지원합니다.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">04</span>
+                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3 class="step-title">시운전 및 모니터링</h3>
+                        <p class="step-desc">최종 구동 테스트 후 관제 대시보드와 연동하여 안정적인 가동을 실시간으로 확인합니다.</p>
+                    </div>
+                </div>
+
+                <div class="cta-container">
+                    <a href="inquiry_board.html" class="cta-btn">긴급 출동 / 유지보수 문의하기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 bg-gray-100 text-center text-gray-500 text-sm">
+        <p>© 2026 PrimeFix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+    </script>
+</body>
+</html>

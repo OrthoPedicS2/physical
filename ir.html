@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeFix | 투자정보 (IR)</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f1f5f9; color: #1e293b; }
+        .ir-hero { background: #0f172a; color: white; padding: 120px 0 80px; text-align: center; }
+        .ir-hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; }
+        .stock-dashboard { background: white; border-radius: 2rem; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); }
+        #mobile-menu { display: none; }
+        .price-up { color: #ef4444; }
+        .price-down { color: #3b82f6; }
+        .quick-links { list-style: none; padding: 0; }
+        .quick-links li { margin-bottom: 15px; }
+        .quick-link-btn { display: flex; align-items: center; justify-content: space-between; padding: 20px; background: #f8fafc; border-radius: 15px; text-decoration: none; color: #1e293b; font-weight: 700; transition: 0.3s; }
+        .quick-link-btn:hover { background: #e2e8f0; transform: translateX(5px); }
+        .quick-link-btn i { color: #3b82f6; }
+        .ir-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md z-[1000] border-b border-slate-100" style="all: unset; position: fixed; top: 0; left: 0; width: 100%; height: 96px; background-color: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;">
+        <nav class="max-w-[1440px] mx-auto px-10 h-full flex justify-between items-center relative z-20" style="display: flex; height: 100%; align-items: center; justify-content: space-between;">
+            <div class="text-2xl font-black tracking-tighter shrink-0">
+                <a href="index.html" class="text-slate-900 hover:text-blue-600 transition-colors" style="display: flex; align-items: center;">PRIME<span class="text-blue-600">FIX</span></a>
+            </div>
+            
+            <ul class="hidden lg:flex items-center gap-12 xl:gap-16 font-bold text-[1rem] text-slate-800" style="display: flex; align-items: center; list-style: none;">
+                <li class="relative group py-8">
+                    <a href="business.html" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">사업분야 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-48 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="smart-factory.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">스마트팩토리 구축</a>
+                        <a href="preventive-maintenance.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">예방 정비</a>
+                        <a href="robot-control.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">로봇관제</a>
+                    </div>
+                </li>
+                <li><a href="maintenance.html" class="hover:text-blue-600 transition-colors">유지보수</a></li>
+                <li><a href="ir.html" class="text-blue-600 border-b-2 border-blue-600">투자정보</a></li>
+                <li><a href="newsroom.html" class="hover:text-blue-600 transition-colors">뉴스룸</a></li>
+                <li class="relative group py-8">
+                    <a href="#" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">고객지원 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-40 bg-white shadow-xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <a href="inquiry_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">문의게시판</a>
+                        <a href="free_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">자유게시판</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-8 relative z-30" style="display: flex; align-items: center;">
+                <div class="hidden lg:flex items-center gap-6 font-bold text-[0.9rem] text-slate-600" style="display: flex; align-items: center;">
+                    <a href="login.html" class="hover:text-blue-600 transition-colors">로그인</a>
+                    <a href="mypage.html" class="hover:text-blue-600 transition-colors">나의 정보</a>
+                    <div class="w-[1px] h-3 bg-slate-200"></div>
+                    <div class="flex items-center gap-2" style="display: flex; align-items: center;">
+                        <span class="text-blue-600 cursor-pointer">KO</span>
+                        <span class="text-slate-200 text-[10px]">|</span>
+                        <span class="text-slate-400 font-medium cursor-pointer hover:text-slate-600">EN</span>
+                    </div>
+                </div>
+                <button id="menu-btn" class="lg:hidden text-2xl text-slate-900 outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-10 flex-col gap-6 font-bold text-slate-800">
+            <a href="business.html">사업분야</a>
+            <a href="maintenance.html">유지보수</a>
+            <a href="ir.html">투자정보</a>
+            <a href="newsroom.html">뉴스룸</a>
+            <a href="#">고객지원</a>
+            <hr class="border-slate-100">
+            <a href="login.html">로그인</a>
+            <a href="mypage.html">나의 정보</a>
+        </div>
+    </header>
+
+    <div class="ir-hero">
+        <div class="container mx-auto px-10">
+            <div class="mb-12">
+                <p class="text-blue-600 font-bold tracking-widest text-sm mb-4 uppercase">Investor Relations</p>
+                <h1 class="text-3xl md:text-5xl font-black text-white tracking-tighter">투자정보</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-10" style="margin-top: 40px; padding-bottom: 100px;">
+        <div class="stock-dashboard grid grid-cols-1 lg:grid-cols-2 gap-10" id="stock">
+            <div class="ir-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h2 style="font-weight: 900; font-size: 1.8rem;">PrimeFix <span style="font-size: 0.9rem; color: #94a3b8; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; margin-left: 10px;">003670</span></h2>
+                    </div>
+                    <span style="font-weight: 800; color: #3b82f6;"><i class="fas fa-circle" style="font-size: 0.6rem; vertical-align: middle; margin-right: 5px;"></i> KOSPI LIVE</span>
+                </div>
+                
+                <div style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 40px;">
+                    <span style="font-size: 4rem; font-weight: 900;" id="livePrice">254,500</span>
+                    <span style="font-size: 1.2rem; color: #94a3b8; font-weight: 700;">KRW</span>
+                    <div class="price-up" style="font-size: 1.5rem; font-weight: 800; background: #fee2e2; padding: 8px 15px; border-radius: 12px; margin-left: 20px;">
+                        <i class="fas fa-caret-up"></i> 5,500 (+2.21%)
+                    </div>
+                </div>
+
+                <div style="height: 120px; background: #f8fafc; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                    <i class="fas fa-chart-line fa-4x"></i>
+                </div>
+            </div>
+
+            <div class="ir-card">
+                <h3 style="font-weight: 900; margin-bottom: 25px;">주요 재무 지표 (2023)</h3>
+                <ul class="quick-links">
+                    <li style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                        <span style="color: #64748b; font-weight: 600;">매출액</span>
+                        <span style="font-weight: 800;">4조 7,599억</span>
+                    </li>
+                    <li style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                        <span style="color: #64748b; font-weight: 600;">영업이익</span>
+                        <span style="font-weight: 800;">359억</span>
+                    </li>
+                    <li style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                        <span style="color: #64748b; font-weight: 600;">당기순이익</span>
+                        <span style="font-weight: 800;">439억</span>
+                    </li>
+                    <li style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                        <span style="color: #64748b; font-weight: 600;">자산총계</span>
+                        <span style="font-weight: 800;">7조 3,450억</span>
+                    </li>
+                    <li style="display: flex; justify-content: space-between; padding: 12px 0;">
+                        <span style="color: #64748b; font-weight: 600;">부채비율</span>
+                        <span style="font-weight: 800;">141.2%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+            <h3 style="font-weight: 900; font-size: 1.5rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                <i class="far fa-newspaper" style="color: #3b82f6;"></i> PrimeFix 투자 뉴스
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="ir-card" style="margin-bottom: 0;">
+                    <span style="font-size: 0.8rem; color: #3b82f6; font-weight: 800;">NEWS</span>
+                    <h4 style="margin-top: 10px; font-weight: 800; line-height: 1.4;">PrimeFix, 차세대 AI 로봇 제어 솔루션 대규모 수주 성공</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 15px;">2026.05.18</p>
+                </div>
+                <div class="ir-card" style="margin-bottom: 0;">
+                    <span style="font-size: 0.8rem; color: #3b82f6; font-weight: 800;">ANALYSIS</span>
+                    <h4 style="margin-top: 10px; font-weight: 800; line-height: 1.4;">2분기 실적 전망 '맑음', 스마트팩토리 수요 폭증 수혜</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 15px;">2026.05.15</p>
+                </div>
+                <div class="ir-card" style="margin-bottom: 0;">
+                    <span style="font-size: 0.8rem; color: #3b82f6; font-weight: 800;">REPORT</span>
+                    <h4 style="margin-top: 10px; font-weight: 800; line-height: 1.4;">탄소중립 기술 혁신을 통한 ESG 경영 등급 'A' 획득</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 15px;">2026.05.12</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 bg-gray-100 text-center text-gray-500 text-sm">
+        <p>© 2026 PrimeFix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+    </script>
+    <script src="js/main.js"></script>
+    <script>
+        // Simple price simulation
+        setInterval(() => {
+            const priceEl = document.getElementById('livePrice');
+            let current = parseInt(priceEl.innerText.replace(/,/g, ''));
+            const change = (Math.random() - 0.45) * 500;
+            priceEl.innerText = (Math.round(current + change)).toLocaleString();
+        }, 3000);
+    </script>
+</body>
+</html>

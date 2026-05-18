@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next-Physical AI Dynamics | 미래를 선도하는 Physical AI 솔루션</title>
+    <title>PrimeFix | 미래를 선도하는 Physical AI 솔루션</title>
     <meta name="description" content="신뢰성 있는 하드웨어와 지능형 소프트웨어의 융합, Next-Physical AI Dynamics가 만드는 미래의 솔루션을 만나보세요.">
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,46 +30,95 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
-    <header id="header">
-        <nav class="container">
-            <div class="logo">
-                <a href="#">NEXT-<span>PHYSICAL AI</span></a>
+    <header class="fixed top-0 left-0 w-full z-[1000] border-b border-white/5 py-4 transition-all duration-500 bg-[#0f172a]/80 backdrop-blur-xl" id="main-header">
+        <nav class="max-w-[1440px] mx-auto px-10 flex justify-between items-center relative z-20 h-16">
+            <div class="text-2xl font-black tracking-tighter shrink-0">
+                <a href="index.html" class="text-white hover:text-blue-400 transition-colors" id="logo-link">PRIME<span class="text-blue-400">FIX</span></a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#technology">회사소개</a></li>
-                <li><a href="index.html#business">사업분야</a></li>
-                <li><a href="dashboard.html">대시보드</a></li>
-                <li class="dropdown">
-                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="inquiry_board.html">문의게시판</a></li>
-                        <li><a href="free_board.html">자유게시판</a></li>
-                    </ul>
+            
+            <ul class="hidden lg:flex items-center gap-12 xl:gap-16 font-bold text-[1rem] text-white/90" id="nav-links">
+                <li class="relative group py-4">
+                    <a href="business.html" class="flex items-center gap-1.5 hover:text-blue-400 transition-colors">사업분야 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-48 bg-white shadow-2xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0 text-slate-800">
+                        <a href="smart-factory.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">스마트팩토리 구축</a>
+                        <a href="preventive-maintenance.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">예방 정비</a>
+                        <a href="robot-control.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">로봇관제</a>
+                    </div>
+                </li>
+                <li><a href="maintenance.html" class="hover:text-blue-400 transition-colors">유지보수</a></li>
+                <li><a href="ir.html" class="hover:text-blue-400 transition-colors">투자정보</a></li>
+                <li><a href="newsroom.html" class="hover:text-blue-400 transition-colors">뉴스룸</a></li>
+                <li class="relative group py-4">
+                    <a href="#" class="flex items-center gap-1.5 hover:text-blue-400 transition-colors">고객지원 <i class="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform"></i></a>
+                    <div class="absolute top-full left-0 w-40 bg-white shadow-2xl border border-slate-50 rounded-2xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0 text-slate-800">
+                        <a href="inquiry_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">문의게시판</a>
+                        <a href="free_board.html" class="block px-6 py-2 hover:bg-slate-50 hover:text-blue-600">자유게시판</a>
+                    </div>
                 </li>
             </ul>
-            <div class="header-right">
-                <div class="user-links">
-                    <a href="login.html">로그인</a>
-                    <a href="mypage.html">나의 정보</a>
+
+            <div class="flex items-center gap-8 relative z-30 font-bold text-[0.9rem]">
+                <div class="hidden lg:flex items-center gap-6 text-white/70" id="utility-links">
+                    <a href="login.html" class="hover:text-blue-400 transition-colors">로그인</a>
+                    <a href="mypage.html" class="hover:text-blue-400 transition-colors">나의 정보</a>
+                    <div class="w-[1px] h-3 bg-white/10"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-blue-400 cursor-pointer">KO</span>
+                        <span class="text-white/10 text-[10px]">|</span>
+                        <span class="text-white/30 cursor-pointer hover:text-white">EN</span>
+                    </div>
                 </div>
-                <span class="lang">KO | EN</span>
-                <div class="nav-toggle">
+                <button id="menu-btn" class="lg:hidden text-2xl text-white outline-none">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </div>
         </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-10 flex-col gap-6 font-bold text-slate-800">
+            <a href="business.html">사업분야</a>
+            <a href="maintenance.html">유지보수</a>
+            <a href="ir.html">투자정보</a>
+            <a href="newsroom.html">뉴스룸</a>
+            <a href="#">고객지원</a>
+            <hr class="border-slate-100">
+            <a href="login.html">로그인</a>
+            <a href="mypage.html">나의 정보</a>
+        </div>
     </header>
 
     <main>
         <!-- Hero Section -->
         <section id="hero">
-            <video autoplay muted loop playsinline poster="assets/images/hero_bg.jpg" class="hero-video">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-robotic-arm-working-on-a-factory-line-15822-large.mp4" type="video/mp4">
-            </video>
-            <div class="hero-overlay"></div>
-            <div class="hero-content container">
-                <h1 class="fade-in">Physical AI for the <br><span class="highlight">Next Generation</span></h1>
-                <p class="fade-in delay-1">신뢰할 수 있는 하드웨어와 앤티그래비티 기반 지능형 소프트웨어의 완벽한 융합.</p>
+            <div class="hero-slider">
+                <!-- Slide 1: Company Introduction -->
+                <div class="hero-slide active" data-index="01">
+                    <video autoplay muted loop playsinline class="hero-video">
+                        <source src="https://assets.mixkit.co/videos/23155/23155-720.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content container">
+                        <h1 class="hero-title">Physical AI for the <br><span class="highlight">Next Generation</span></h1>
+                        <p class="hero-desc">신뢰할 수 있는 하드웨어와 지능형 소프트웨어의 융합으로 전 세계 산업의 디지털 트랜스포메이션을 선도하는 Next-Physical AI입니다.</p>
+                        <div class="hero-btns">
+                            <a href="#business" class="btn-primary">비전 더보기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Maintenance & Technical Support -->
+                <div class="hero-slide" data-index="02">
+                    <video autoplay muted loop playsinline class="hero-video">
+                        <source src="https://assets.mixkit.co/videos/24333/24333-720.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content container">
+                        <h1 class="hero-title">Expert Support & <br><span class="highlight">Maintenance</span></h1>
+                        <p class="hero-desc">전문 엔지니어의 정밀 진단과 24시간 실시간 모니터링 시스템으로 고객의 장비가 항상 최상의 상태를 유지할 수 있도록 지원합니다.</p>
+                        <div class="hero-btns">
+                            <a href="#business" class="btn-primary">지원 서비스 안내</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="hero-bottom container">
@@ -77,11 +127,15 @@
                     <div class="arrow-down"></div>
                 </div>
                 <div class="hero-slider-ui">
-                    <div class="play-btn"><i class="fas fa-volume-mute"></i></div>
+                    <div class="play-btn" id="playPauseBtn"><i class="fas fa-pause"></i></div>
                     <div class="slider-info">
-                        <span class="current">01</span>
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
+                        <span class="current" id="currentSlide">01</span>
+                        <div class="progress-bar"><div class="progress-fill" id="sliderProgress"></div></div>
                         <span class="total">02</span>
+                    </div>
+                    <div class="slider-nav-btns">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -95,56 +149,95 @@
                 </div>
             </div>
             <div class="business-cards">
-                <div class="biz-card" style="background-image: url('assets/images/card_mobility.png');">
+                <div class="biz-card" onclick="location.href='smart-factory.html'" style="background-image: url('assets/images/biz_smart_factory.png'); cursor: pointer;">
                     <div class="biz-overlay"></div>
                     <div class="biz-info">
-                        <h3>차세대 모빌리티 솔루션</h3>
-                        <p>Physical AI를 기반으로 한 자율주행 보행 보조 및 이동 로봇 플랫폼을 개발합니다.</p>
-                        <div class="biz-btn"><i class="fas fa-arrow-right"></i></div>
+                        <h3>스마트팩토리 구축</h3>
+                        <p>자동화 생산 라인 설계 및 지능형 제조 생태계 구현</p>
+                        <div class="biz-btn"><a href="smart-factory.html" onclick="event.stopPropagation();"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
                 </div>
-                <div class="biz-card active" style="background-image: url('assets/images/card_perception.png');">
+                <div class="biz-card active" onclick="location.href='preventive-maintenance.html'" style="background-image: url('assets/images/biz_preventive.png'); cursor: pointer;">
                     <div class="biz-overlay"></div>
                     <div class="biz-info">
-                        <h3>지능형 인지 분석 기술</h3>
-                        <p>앤티그래비티 기반의 고성능 신경망을 통해 물리 환경을 실시간으로 분석하고 인지합니다.</p>
-                        <div class="biz-btn"><i class="fas fa-arrow-right"></i></div>
+                        <h3>예방 정비</h3>
+                        <p>AI 기반 데이터 분석을 통한 결함 예측 및 사전 차단 솔루션</p>
+                        <div class="biz-btn"><a href="preventive-maintenance.html" onclick="event.stopPropagation();"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
                 </div>
-                <div class="biz-card" style="background-image: url('assets/images/card_infra.png');">
+                <div class="biz-card" onclick="location.href='robot-control.html'" style="background-image: url('assets/images/biz_control.png'); cursor: pointer;">
                     <div class="biz-overlay"></div>
                     <div class="biz-info">
-                        <h3>산업 자동화 인프라</h3>
-                        <p>정밀 기구 제어와 AI 시스템의 통합으로 공정 자동화의 새로운 기준을 제시합니다.</p>
-                        <div class="biz-btn"><i class="fas fa-arrow-right"></i></div>
+                        <h3>로봇관제</h3>
+                        <p>전국 주요 설비의 로봇 운용 상태 실시간 모니터링 및 통합 제어</p>
+                        <div class="biz-btn"><a href="robot-control.html" onclick="event.stopPropagation();"><i class="fas fa-arrow-right"></i></a></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Technology Detail (Antigravity Core) -->
-        <section id="technology">
+        <!-- News Section -->
+        <section id="news" class="reveal">
             <div class="container">
-                <div class="core-highlight fade-in">
-                    <div class="core-text">
-                        <span class="subtitle">Antigravity Core</span>
-                        <h3>앤티그래비티를 통한 무거운 연산의 경량화</h3>
-                        <p>복잡한 딥러닝 모델을 물리 연산 장치에 맞게 최적화하여, 하드웨어의 성능을 200% 이상 끌어올립니다.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check-circle"></i> 초저지연 모션 제어 알고리즘</li>
-                            <li><i class="fas fa-check-circle"></i> 엣지 디바이스 특화 경량화 (Quantization)</li>
-                            <li><i class="fas fa-check-circle"></i> 실시간 환경 트래킹 솔루션</li>
-                        </ul>
+                <div class="section-header center">
+                    <h2>News</h2>
+                    <p class="section-desc">PrimeFix의 따끈따끈한 최신 소식을 확인해 보세요.</p>
+                </div>
+                <div class="news-slider-wrapper">
+                    <div class="news-slider-track">
+                        <div class="news-card">
+                            <div class="news-img-box">
+                                <img src="assets/images/news_1.png" alt="News 1">
+                                <div class="news-img-overlay"></div>
+                                <div class="news-badge">보도자료</div>
+                            </div>
+                            <div class="news-info">
+                                <h3>[포항] Next-Physical AI, 지역사회 기술 교육 '퓨처 테크 Day' 개최</h3>
+                                <p class="news-date">2026.05.14</p>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <div class="news-img-box">
+                                <img src="assets/images/news_2.png" alt="News 2">
+                                <div class="news-img-overlay"></div>
+                                <div class="news-badge">보도자료</div>
+                            </div>
+                            <div class="news-info">
+                                <h3>국내 배터리 컨퍼런스 'DJBIC' 혁신 기술 부문 선정</h3>
+                                <p class="news-date">2026.05.06</p>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <div class="news-img-box">
+                                <img src="assets/images/news_3.png" alt="News 3">
+                                <div class="news-img-overlay"></div>
+                                <div class="news-badge">공지사항</div>
+                            </div>
+                            <div class="news-info">
+                                <h3>2026 하반기 신입/경력 R&D 엔지니어 공개 채용</h3>
+                                <p class="news-date">2026.04.28</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="news-nav-btn prev" id="newsPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="news-nav-btn next" id="newsNext"><i class="fas fa-chevron-right"></i></button>
+                    
+                    <div class="news-dots-container">
+                        <span class="news-dot active"></span>
+                        <span class="news-dot"></span>
+                        <span class="news-dot"></span>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
         <div class="container">
             <div class="footer-top">
-                <div class="footer-logo">NEXT-PHYSICAL AI</div>
+                <div class="footer-logo">PrimeFix</div>
                 <div class="footer-nav">
                     <a href="#">개인정보처리방침</a>
                     <a href="#">이메일무단수집거부</a>
@@ -157,7 +250,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Next-Physical AI Dynamics. All rights reserved.</p>
+                <p>&copy; 2026 PrimeFix. All rights reserved.</p>
             </div>
         </div>
     </footer>
