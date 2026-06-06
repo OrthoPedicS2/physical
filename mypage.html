@@ -3,96 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지 | Next-Physical AI Dynamics</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>마이페이지 | PrimeFix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .mypage-wrap { padding: 150px 0; background: #fcfcfc; min-height: 100vh; }
-        .mypage-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; }
-        .mypage-sidebar { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .sidebar-menu { list-style: none; margin-top: 30px; }
-        .sidebar-menu li { margin-bottom: 15px; }
-        .sidebar-menu a { display: block; padding: 12px 20px; border-radius: 10px; font-weight: 600; color: #666; transition: 0.3s; }
-        .sidebar-menu a:hover, .sidebar-menu a.active { background: var(--primary-blue); color: #fff; }
-        
-        .mypage-content { background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .info-group { margin-bottom: 30px; }
-        .info-group h3 { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .info-row { display: flex; padding: 15px 0; border-bottom: 1px dotted #eee; }
-        .info-label { width: 150px; font-weight: 700; color: #333; }
+        * { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+        body { background: #0f172a; min-height: 100vh; }
+
+        .bg-page {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+
+        /* Glass card */
+        .glass { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(16px); }
+        .glass-hover:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+
+        /* Sidebar menu */
+        .menu-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; border-radius: 12px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600; font-size: 0.875rem;
+            cursor: pointer; transition: all 0.25s;
+            border: 1px solid transparent;
+        }
+        .menu-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
+        .menu-item.active {
+            color: #60a5fa; background: rgba(96,165,250,0.1);
+            border-color: rgba(96,165,250,0.25);
+        }
+        .menu-item i { width: 18px; text-align: center; }
+
+        /* Info row */
+        .info-row {
+            display: flex; align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .info-row:last-child { border-bottom: none; }
+
+        /* Badge */
+        .badge {
+            font-size: 0.7rem; padding: 3px 10px; border-radius: 99px;
+            font-weight: 700; letter-spacing: 0.5px;
+        }
+
+        /* Avatar gradient */
+        .avatar-ring {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 3px; border-radius: 50%;
+        }
+        .avatar-inner {
+            background: #1e293b; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Stat card */
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px; padding: 20px;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-2px);
+        }
+
+        /* Edit input */
+        .edit-input {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .edit-input:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+        }
+
+        /* Sections */
+        .section-panel { display: none; }
+        .section-panel.active { display: block; }
+
+        /* Fade animation */
+        .fade-in { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Logout btn */
+        .btn-logout {
+            color: rgba(239,68,68,0.7);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        .btn-logout:hover {
+            color: #ef4444;
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.4);
+        }
+
+        /* Save btn */
+        .btn-save {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white; font-weight: 700;
+            border-radius: 10px; padding: 10px 24px;
+            transition: all 0.3s;
+        }
+        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99,102,241,0.35); }
+
+        /* Toast */
+        #toast {
+            position: fixed; bottom: 32px; right: 32px;
+            background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac; padding: 14px 22px; border-radius: 12px;
+            font-size: 0.875rem; font-weight: 600;
+            backdrop-filter: blur(10px);
+            transform: translateY(20px); opacity: 0;
+            transition: all 0.3s; z-index: 9999;
+            pointer-events: none;
+        }
+        #toast.show { transform: translateY(0); opacity: 1; }
     </style>
 </head>
-<body>
-    <header id="header" class="scrolled">
-        <nav class="container">
-            <div class="logo"><a href="index.html">NEXT-<span>PHYSICAL AI</span></a></div>
-            <ul class="nav-menu">
-                <li><a href="index.html#technology">회사소개</a></li>
-                <li><a href="index.html#business">사업분야</a></li>
-                <li><a href="dashboard.html">대시보드</a></li>
-                <li class="dropdown">
-                    <a href="#">커뮤니티 <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="inquiry_board.html">문의게시판</a></li>
-                        <li><a href="free_board.html">자유게시판</a></li>
-                    </ul>
-                </li>
-            </ul>
+<body class="bg-page">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#0f172a]/80 backdrop-blur-xl">
+        <nav class="max-w-[1440px] mx-auto px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-black text-white tracking-tighter">PRIME<span class="text-blue-400">FIX</span></a>
+            <div class="flex items-center gap-4 text-sm text-white/50">
+                <a href="index.html" class="hover:text-white transition-colors">홈</a>
+                <span class="text-white/10">|</span>
+                <span class="text-blue-400 font-semibold">마이페이지</span>
+            </div>
         </nav>
     </header>
 
-    <main class="mypage-wrap">
-        <div class="container">
-            <div class="mypage-grid">
-                <aside class="mypage-sidebar reveal-left">
-                    <div class="user-profile-card" style="box-shadow: none; padding: 0;">
-                        <div class="profile-img"><i class="fas fa-user-circle"></i></div>
-                        <div class="profile-info">
-                            <h4>방문객님</h4>
-                            <p>Premium Member</p>
+    <!-- Main Content -->
+    <main class="max-w-[1200px] mx-auto px-6 pt-28 pb-20">
+        
+        <!-- Profile Header Card -->
+        <div class="glass rounded-3xl p-8 mb-8 fade-in">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <!-- Avatar -->
+                <div class="avatar-ring flex-shrink-0">
+                    <div class="avatar-inner w-20 h-20">
+                        <i class="fas fa-user text-3xl text-blue-400"></i>
+                    </div>
+                </div>
+                <!-- User info -->
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h1 id="profile-name" class="text-2xl font-bold text-white">-</h1>
+                        <span id="profile-badge" class="badge bg-blue-500/20 text-blue-400 border border-blue-400/30">Member</span>
+                    </div>
+                    <p id="profile-email" class="text-white/50 text-sm mb-3">-</p>
+                    <div class="flex flex-wrap gap-4 text-xs text-white/30">
+                        <span><i class="fas fa-calendar-alt mr-1"></i>가입일: <span id="profile-join">-</span></span>
+                        <span><i class="fas fa-clock mr-1"></i>최근 접속: <span id="profile-lastlogin">-</span></span>
+                    </div>
+                </div>
+                <!-- Logout button -->
+                <button onclick="handleLogout()" class="menu-item btn-logout flex-shrink-0 text-sm">
+                    <i class="fas fa-sign-out-alt"></i> 로그아웃
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6">
+
+            <!-- Sidebar -->
+            <aside class="space-y-2 fade-in">
+                <div class="glass rounded-2xl p-4 space-y-1">
+                    <button class="menu-item active w-full" id="btn-info" onclick="showSection('info')">
+                        <i class="fas fa-user-circle"></i> 나의 정보
+                    </button>
+                    <button class="menu-item w-full" id="btn-edit" onclick="showSection('edit')">
+                        <i class="fas fa-edit"></i> 정보 수정
+                    </button>
+                    <button class="menu-item w-full" id="btn-activity" onclick="showSection('activity')">
+                        <i class="fas fa-chart-line"></i> 활동 내역
+                    </button>
+                    <button class="menu-item w-full" id="btn-security" onclick="showSection('security')">
+                        <i class="fas fa-shield-alt"></i> 보안 설정
+                    </button>
+                    <hr class="border-white/5 my-2">
+                    <button class="menu-item btn-logout w-full" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> 로그아웃
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="fade-in">
+
+                <!-- 나의 정보 Section -->
+                <div id="section-info" class="section-panel active">
+                    <div class="glass rounded-2xl p-8">
+                        <h2 class="text-white font-bold text-xl mb-6 flex items-center gap-2">
+                            <i class="fas fa-user-circle text-blue-400 text-lg"></i> 나의 정보
+                        </h2>
+
+                        <!-- Stat Cards -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+                            <div class="stat-card text-center">
+                                <div class="text-3xl font-black text-blue-400 mb-1">0</div>
+                                <div class="text-xs text-white/40">작성 게시글</div>
+                            </div>
+                            <div class="stat-card text-center">
+                                <div class="text-3xl font-black text-indigo-400 mb-1">0</div>
+                                <div class="text-xs text-white/40">문의 내역</div>
+                            </div>
+                            <div class="stat-card text-center col-span-2 sm:col-span-1">
+                                <div class="text-3xl font-black text-violet-400 mb-1" id="days-count">1</div>
+                                <div class="text-xs text-white/40">가입 경과일</div>
+                            </div>
+                        </div>
+
+                        <!-- Info Rows -->
+                        <div class="space-y-0">
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-id-card mr-2 text-blue-400/60"></i>아이디</div>
+                                <div id="info-id" class="text-white text-sm font-semibold">-</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-user mr-2 text-blue-400/60"></i>이름</div>
+                                <div id="info-name" class="text-white text-sm font-semibold">-</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-envelope mr-2 text-blue-400/60"></i>이메일</div>
+                                <div id="info-email" class="text-white text-sm font-semibold">-</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-phone mr-2 text-blue-400/60"></i>연락처</div>
+                                <div id="info-phone" class="text-white text-sm font-semibold">-</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-star mr-2 text-blue-400/60"></i>등급</div>
+                                <div id="info-role" class="text-white text-sm font-semibold">-</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="w-32 text-white/40 text-sm font-semibold flex-shrink-0"><i class="fas fa-calendar mr-2 text-blue-400/60"></i>가입일</div>
+                                <div id="info-join" class="text-white text-sm font-semibold">-</div>
+                            </div>
                         </div>
                     </div>
-                    <ul class="sidebar-menu">
-                        <li><a href="#" class="active">나의 정보 수정</a></li>
-                        <li><a href="#">내 게시글 관리</a></li>
-                        <li><a href="#">문의 내역</a></li>
-                        <li><a href="index.html">로그아웃</a></li>
-                    </ul>
-                </aside>
-                
-                <section class="mypage-content reveal-right">
-                    <div class="info-group">
-                        <h3>계정 정보</h3>
-                        <div class="info-row">
-                            <div class="info-label">아이디</div>
-                            <div class="info-value">visitor_ai</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">이름</div>
-                            <div class="info-value">방문객</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">이메일</div>
-                            <div class="info-value">visitor@example.com</div>
+                </div>
+
+                <!-- 정보 수정 Section -->
+                <div id="section-edit" class="section-panel">
+                    <div class="glass rounded-2xl p-8">
+                        <h2 class="text-white font-bold text-xl mb-6 flex items-center gap-2">
+                            <i class="fas fa-edit text-blue-400 text-lg"></i> 정보 수정
+                        </h2>
+                        <form onsubmit="saveInfo(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">이름</label>
+                                <input id="edit-name" type="text" class="edit-input" placeholder="이름을 입력하세요" required>
+                            </div>
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">이메일</label>
+                                <input id="edit-email" type="email" class="edit-input" placeholder="이메일을 입력하세요" required>
+                            </div>
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">연락처</label>
+                                <input id="edit-phone" type="tel" class="edit-input" placeholder="연락처를 입력하세요">
+                            </div>
+                            <div class="pt-2">
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-save mr-2"></i>저장하기
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 활동 내역 Section -->
+                <div id="section-activity" class="section-panel">
+                    <div class="glass rounded-2xl p-8">
+                        <h2 class="text-white font-bold text-xl mb-6 flex items-center gap-2">
+                            <i class="fas fa-chart-line text-blue-400 text-lg"></i> 활동 내역
+                        </h2>
+                        <div class="text-center py-16">
+                            <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/5 mb-4">
+                                <i class="fas fa-inbox text-3xl text-white/20"></i>
+                            </div>
+                            <p class="text-white/30 text-sm">아직 활동 내역이 없습니다.</p>
                         </div>
                     </div>
-                    
-                    <div class="info-group">
-                        <h3>활동 내역</h3>
-                        <div class="info-row">
-                            <div class="info-label">자유게시판 작성글</div>
-                            <div class="info-value">2개</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">최근 접속일</div>
-                            <div class="info-value">2026-05-11 12:28</div>
-                        </div>
+                </div>
+
+                <!-- 보안 설정 Section -->
+                <div id="section-security" class="section-panel">
+                    <div class="glass rounded-2xl p-8">
+                        <h2 class="text-white font-bold text-xl mb-6 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-blue-400 text-lg"></i> 보안 설정
+                        </h2>
+                        <form onsubmit="changePassword(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">현재 비밀번호</label>
+                                <input id="sec-current" type="password" class="edit-input" placeholder="현재 비밀번호" required>
+                            </div>
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">새 비밀번호</label>
+                                <input id="sec-new" type="password" class="edit-input" placeholder="새 비밀번호 (6자 이상)" required minlength="6">
+                            </div>
+                            <div>
+                                <label class="block text-white/50 text-xs font-semibold mb-2 uppercase tracking-wider">새 비밀번호 확인</label>
+                                <input id="sec-confirm" type="password" class="edit-input" placeholder="새 비밀번호를 다시 입력하세요" required>
+                            </div>
+                            <div id="sec-msg" class="hidden rounded-xl px-4 py-3 text-sm"></div>
+                            <div class="pt-2">
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-key mr-2"></i>비밀번호 변경
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </section>
+                </div>
+
             </div>
         </div>
     </main>
 
-    <script src="js/main.js"></script>
+    <!-- Toast Notification -->
+    <div id="toast"><i class="fas fa-check-circle mr-2"></i><span id="toast-msg"></span></div>
+
+    <script>
+        // Load user
+        const userData = JSON.parse(localStorage.getItem('pf_currentUser') || 'null');
+
+        if (!userData) {
+            // Not logged in — redirect
+            location.href = 'login.html';
+        } else {
+            populateUI(userData);
+        }
+
+        function populateUI(user) {
+            // Profile header
+            document.getElementById('profile-name').textContent = user.name || user.id;
+            document.getElementById('profile-email').textContent = user.email || '이메일 없음';
+            document.getElementById('profile-join').textContent = user.joinDate || '-';
+            document.getElementById('profile-lastlogin').textContent = user.lastLogin || '-';
+            document.getElementById('profile-badge').textContent = user.role || 'Member';
+
+            // Info section
+            document.getElementById('info-id').textContent = user.id || '-';
+            document.getElementById('info-name').textContent = user.name || '-';
+            document.getElementById('info-email').textContent = user.email || '-';
+            document.getElementById('info-phone').textContent = user.phone || '미등록';
+            document.getElementById('info-role').textContent = user.role || 'Member';
+            document.getElementById('info-join').textContent = user.joinDate || '-';
+
+            // Edit form prefill
+            document.getElementById('edit-name').value = user.name || '';
+            document.getElementById('edit-email').value = user.email || '';
+            document.getElementById('edit-phone').value = user.phone || '';
+
+            // Days count
+            if (user.joinDate) {
+                const join = new Date(user.joinDate.replace(/\./g, '-'));
+                const now = new Date();
+                const diff = Math.max(1, Math.floor((now - join) / (1000 * 60 * 60 * 24)));
+                document.getElementById('days-count').textContent = diff;
+            }
+        }
+
+        function showSection(name) {
+            document.querySelectorAll('.section-panel').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.menu-item[id^="btn-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById('section-' + name).classList.add('active');
+            document.getElementById('btn-' + name).classList.add('active');
+        }
+
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            if (type === 'error') {
+                toast.style.background = 'rgba(239,68,68,0.15)';
+                toast.style.borderColor = 'rgba(239,68,68,0.3)';
+                toast.style.color = '#fca5a5';
+            } else {
+                toast.style.background = 'rgba(34,197,94,0.15)';
+                toast.style.borderColor = 'rgba(34,197,94,0.3)';
+                toast.style.color = '#86efac';
+            }
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function saveInfo(e) {
+            e.preventDefault();
+            const name = document.getElementById('edit-name').value.trim();
+            const email = document.getElementById('edit-email').value.trim();
+            const phone = document.getElementById('edit-phone').value.trim();
+
+            const users = JSON.parse(localStorage.getItem('pf_users') || '[]');
+            const current = JSON.parse(localStorage.getItem('pf_currentUser'));
+            const idx = users.findIndex(u => u.id === current.id);
+
+            if (idx !== -1) {
+                users[idx].name = name;
+                users[idx].email = email;
+                users[idx].phone = phone;
+                localStorage.setItem('pf_users', JSON.stringify(users));
+                localStorage.setItem('pf_currentUser', JSON.stringify(users[idx]));
+                populateUI(users[idx]);
+                showToast('정보가 성공적으로 저장되었습니다!');
+                showSection('info');
+            }
+        }
+
+        function changePassword(e) {
+            e.preventDefault();
+            const current = JSON.parse(localStorage.getItem('pf_currentUser'));
+            const curPw = document.getElementById('sec-current').value;
+            const newPw = document.getElementById('sec-new').value;
+            const confirmPw = document.getElementById('sec-confirm').value;
+            const msgEl = document.getElementById('sec-msg');
+
+            if (current.pw !== curPw) {
+                msgEl.textContent = '현재 비밀번호가 올바르지 않습니다.';
+                msgEl.className = 'rounded-xl px-4 py-3 text-sm bg-red-500/15 border border-red-500/30 text-red-300';
+                msgEl.classList.remove('hidden');
+                return;
+            }
+            if (newPw !== confirmPw) {
+                msgEl.textContent = '새 비밀번호가 일치하지 않습니다.';
+                msgEl.className = 'rounded-xl px-4 py-3 text-sm bg-red-500/15 border border-red-500/30 text-red-300';
+                msgEl.classList.remove('hidden');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('pf_users') || '[]');
+            const idx = users.findIndex(u => u.id === current.id);
+            if (idx !== -1) {
+                users[idx].pw = newPw;
+                localStorage.setItem('pf_users', JSON.stringify(users));
+                localStorage.setItem('pf_currentUser', JSON.stringify(users[idx]));
+            }
+
+            msgEl.classList.add('hidden');
+            document.getElementById('sec-current').value = '';
+            document.getElementById('sec-new').value = '';
+            document.getElementById('sec-confirm').value = '';
+            showToast('비밀번호가 변경되었습니다!');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('pf_currentUser');
+            location.href = 'index.html';
+        }
+    </script>
 </body>
 </html>

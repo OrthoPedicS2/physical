@@ -8,13 +8,97 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #0c0e12; color: white; padding-top: 100px; }
-        .business-hero { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .business-hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 2rem; }
-        .biz-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        .biz-detail-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 2rem; padding: 3rem; }
-        .biz-detail-card h2 { color: #3b82f6; margin-bottom: 1.5rem; font-size: 1.8rem; }
-        .biz-detail-card p { line-height: 1.6; color: #94a3b8; font-size: 1.1rem; }
+        body { background: #0c0e12; color: white; padding-top: 100px; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+        .business-hero { padding: 8rem 2rem 4rem; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .business-hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .biz-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+        
+        .biz-detail-card { 
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid rgba(255,255,255,0.06); 
+            border-radius: 1.5rem; 
+            padding: 3.5rem 2.5rem; 
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .biz-detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .biz-detail-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+        
+        .biz-detail-card:hover::before {
+            opacity: 1;
+        }
+        
+        .biz-icon {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 2rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .biz-detail-card:hover .biz-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .biz-detail-card h2 { 
+            color: #ffffff; 
+            margin-bottom: 1rem; 
+            font-size: 1.8rem; 
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        
+        .biz-detail-card:hover h2 {
+            color: #3b82f6;
+        }
+        
+        .biz-detail-card p { 
+            line-height: 1.7; 
+            color: #8a99ad; 
+            font-size: 1.05rem; 
+            font-weight: 400;
+        }
+
+        .learn-more {
+            margin-top: auto;
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: gap 0.3s ease, opacity 0.3s ease;
+        }
+
+        .biz-detail-card:hover .learn-more {
+            gap: 0.8rem;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -24,39 +108,45 @@
                 <a href="index.html">Prime<span>Fix</span></a>
             </div>
             <ul class="nav-menu">
-                <li><a href="maintenance.html">회사소개</a></li>
+                <li><a href="company-info.html">회사소개</a></li>
                 <li class="dropdown">
-                    <a href="business.html">사업분야 <i class="fas fa-chevron-down"></i></a>
+                    <a href="business.html" style="color: #3b82f6;">사업분야 <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="business.html#smart-factory">스마트팩토리 구축</a></li>
-                        <li><a href="business.html#preventive">예방 정비</a></li>
-                        <li><a href="business.html#control">로봇관제</a></li>
+                        <li><a href="smart-factory.html">스마트팩토리 구축</a></li>
+                        <li><a href="preventive-maintenance.html">예방 정비</a></li>
+                        <li><a href="robot-control.html">로봇관제</a></li>
                     </ul>
                 </li>
-                <li><a href="index.html#maintenance">유지보수</a></li>
-                <li><a href="index.html#news">투자정보</a></li>
-                <li><a href="index.html#news">뉴스룸</a></li>
+                <li><a href="maintenance.html">유지보수</a></li>
+                <li><a href="ir.html">투자정보</a></li>
+                <li><a href="newsroom.html">뉴스룸</a></li>
             </ul>
         </nav>
     </header>
-
+ 
     <main class="business-hero">
-        <h1>PrimeFix <br><span style="color: #3b82f6;">Business Areas</span></h1>
-        <p style="font-size: 1.2rem; color: #64748b;">최첨단 로봇 유지보수 솔루션을 통해 산업의 연속성을 보장합니다.</p>
-
+        <h1 class="fade-in">PrimeFix <br><span style="color: #3b82f6;">Business Areas</span></h1>
+        <p style="font-size: 1.25rem; color: #64748b; font-weight: 500;">최첨단 로봇 유지보수 솔루션을 통해 산업의 연속성을 보장합니다.</p>
+ 
         <div class="biz-detail-grid">
-            <div class="biz-detail-card">
+            <a href="smart-factory.html" class="biz-detail-card">
+                <div class="biz-icon"><i class="fas fa-industry"></i></div>
                 <h2>스마트팩토리 구축</h2>
                 <p>생산 라인의 완전 자동화를 위한 로봇 시스템 설계 및 지능형 제조 환경을 구축합니다. 생산 효율성을 극대화하고 운영 비용을 혁신적으로 절감합니다.</p>
-            </div>
-            <div class="biz-detail-card">
+                <div class="learn-more">자세히 보기 <i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="preventive-maintenance.html" class="biz-detail-card">
+                <div class="biz-icon"><i class="fas fa-shield-alt"></i></div>
                 <h2>예방 정비</h2>
                 <p>AI 기반의 실시간 데이터 분석을 통해 기기 고장을 사전에 예측합니다. 예기치 못한 라인 중단을 방지하고 설비의 수명을 연장하는 최적의 솔루션을 제공합니다.</p>
-            </div>
-            <div class="biz-detail-card">
+                <div class="learn-more">자세히 보기 <i class="fas fa-arrow-right"></i></div>
+            </a>
+            <a href="robot-control.html" class="biz-detail-card">
+                <div class="biz-icon"><i class="fas fa-network-wired"></i></div>
                 <h2>로봇관제</h2>
                 <p>전국에 분산된 산업용 로봇들의 통합 관제 시스템을 통해 운용 상태를 실시간으로 모니터링하고, 원격 제어 및 긴급 대응 시스템을 운영합니다.</p>
-            </div>
+                <div class="learn-more">자세히 보기 <i class="fas fa-arrow-right"></i></div>
+            </a>
         </div>
     </main>
 
@@ -65,5 +155,6 @@
             <p style="color: #475569;">&copy; 2026 PrimeFix Dynamics. All rights reserved.</p>
         </div>
     </footer>
+    <script src="js/auth.js"></script>
 </body>
 </html>

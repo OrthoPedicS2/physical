@@ -3,44 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 | Next-Physical AI Dynamics</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>로그인 | PrimeFix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+        body { background: #0f172a; min-height: 100vh; }
+
+        /* Animated background */
+        .bg-animated {
+            position: fixed; inset: 0; z-index: 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow: hidden;
+        }
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+            top: -200px; left: -200px;
+            animation: floatBg 8s ease-in-out infinite;
+        }
+        .bg-animated::after {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+            bottom: -150px; right: -150px;
+            animation: floatBg 10s ease-in-out infinite reverse;
+        }
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Glass card */
+        .glass-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        /* Input styles */
+        .input-field {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .input-field:focus {
+            background: rgba(255,255,255,0.1);
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+            outline: none;
+        }
+        .input-field::placeholder { color: rgba(255,255,255,0.35); }
+
+        /* Submit button */
+        .btn-submit {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        /* Tab styles */
+        .tab-btn {
+            color: rgba(255,255,255,0.4);
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+
+        /* Fade in animation */
+        .fade-up {
+            animation: fadeUp 0.6s ease forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Error / success message */
+        .msg-error {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #fca5a5;
+        }
+        .msg-success {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+    </style>
 </head>
-<body class="login-page">
-    <header id="header" class="scrolled">
-        <nav class="container">
-            <div class="logo"><a href="index.html">NEXT-<span>PHYSICAL AI</span></a></div>
-            <ul class="nav-menu">
-                <li><a href="index.html#technology">회사소개</a></li>
-                <li><a href="index.html#business">사업분야</a></li>
-                <li><a href="dashboard.html">대시보드</a></li>
-            </ul>
-        </nav>
+<body class="relative flex items-center justify-center min-h-screen">
+    <div class="bg-animated"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 px-8 flex items-center justify-between border-b border-white/5 bg-[#0f172a]/60 backdrop-blur-xl">
+        <a href="index.html" class="text-2xl font-black text-white tracking-tighter">PRIME<span class="text-blue-400">FIX</span></a>
+        <a href="index.html" class="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-2">
+            <i class="fas fa-arrow-left text-xs"></i> 메인으로
+        </a>
     </header>
 
-    <main class="login-wrap">
-        <div class="login-card reveal">
-            <h2>로그인</h2>
-            <form id="loginForm">
-                <input type="text" id="username" placeholder="아이디" required>
-                <input type="password" id="password" placeholder="비밀번호" required>
-                <button type="submit" class="btn-login-submit">로그인하기</button>
+    <!-- Main Login/Signup Card -->
+    <div class="relative z-10 w-full max-w-md mx-4 fade-up mt-16">
+        <div class="glass-card rounded-3xl p-8">
+
+            <!-- Logo / Title -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 mb-4 shadow-lg shadow-blue-500/30">
+                    <i class="fas fa-robot text-white text-2xl"></i>
+                </div>
+                <h1 class="text-white text-2xl font-bold">PrimeFix 계정</h1>
+                <p class="text-white/40 text-sm mt-1">스마트 팩토리 솔루션 포털</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex border-b border-white/10 mb-8">
+                <button class="tab-btn active flex-1 pb-3 font-bold text-sm" id="tab-login" onclick="switchTab('login')">로그인</button>
+                <button class="tab-btn flex-1 pb-3 font-bold text-sm" id="tab-signup" onclick="switchTab('signup')">회원가입</button>
+            </div>
+
+            <!-- Message Area -->
+            <div id="msg-area" class="hidden rounded-xl px-4 py-3 text-sm mb-4"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-user text-sm"></i></span>
+                    <input id="login-id" type="text" placeholder="아이디" required
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-lock text-sm"></i></span>
+                    <input id="login-pw" type="password" placeholder="비밀번호" required
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <button type="submit" class="btn-submit w-full py-3.5 rounded-xl text-white font-bold text-sm mt-2">
+                    <i class="fas fa-sign-in-alt mr-2"></i>로그인하기
+                </button>
             </form>
-            <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a> | <a href="#">회원가입</a>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="space-y-4 hidden" onsubmit="handleSignup(event)">
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-id-card text-sm"></i></span>
+                    <input id="signup-id" type="text" placeholder="아이디 (영문/숫자)" required
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-user text-sm"></i></span>
+                    <input id="signup-name" type="text" placeholder="이름" required
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-envelope text-sm"></i></span>
+                    <input id="signup-email" type="email" placeholder="이메일" required
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-phone text-sm"></i></span>
+                    <input id="signup-phone" type="tel" placeholder="연락처 (선택)" 
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"><i class="fas fa-lock text-sm"></i></span>
+                    <input id="signup-pw" type="password" placeholder="비밀번호 (6자 이상)" required minlength="6"
+                        class="input-field w-full pl-10 pr-4 py-3.5 rounded-xl text-sm">
+                </div>
+                <button type="submit" class="btn-submit w-full py-3.5 rounded-xl text-white font-bold text-sm mt-2">
+                    <i class="fas fa-user-plus mr-2"></i>회원가입하기
+                </button>
+            </form>
+
+            <!-- Footer links -->
+            <div class="mt-6 text-center text-xs text-white/30">
+                <span id="tab-switch-hint">계정이 없으신가요? 
+                    <button onclick="switchTab('signup')" class="text-blue-400 hover:text-blue-300 font-semibold">회원가입</button>
+                </span>
             </div>
         </div>
-    </main>
+    </div>
 
-    <script src="js/main.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+            const hint = document.getElementById('tab-switch-hint');
+            clearMsg();
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                tabLogin.classList.add('active');
+                tabSignup.classList.remove('active');
+                hint.innerHTML = '계정이 없으신가요? <button onclick="switchTab(\'signup\')" class="text-blue-400 hover:text-blue-300 font-semibold">회원가입</button>';
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                tabLogin.classList.remove('active');
+                tabSignup.classList.add('active');
+                hint.innerHTML = '이미 계정이 있으신가요? <button onclick="switchTab(\'login\')" class="text-blue-400 hover:text-blue-300 font-semibold">로그인</button>';
+            }
+        }
+
+        function showMsg(text, type = 'error') {
+            const el = document.getElementById('msg-area');
+            el.textContent = text;
+            el.className = `rounded-xl px-4 py-3 text-sm mb-4 ${type === 'error' ? 'msg-error' : 'msg-success'}`;
+            el.classList.remove('hidden');
+        }
+        function clearMsg() {
+            document.getElementById('msg-area').classList.add('hidden');
+        }
+
+        function handleLogin(e) {
             e.preventDefault();
-            // 간단한 모의 로그인 성공 처리
-            alert('로그인에 성공했습니다!');
+            const id = document.getElementById('login-id').value.trim();
+            const pw = document.getElementById('login-pw').value;
+
+            const users = JSON.parse(localStorage.getItem('pf_users') || '[]');
+            const user = users.find(u => u.id === id && u.pw === pw);
+
+            if (!user) {
+                showMsg('아이디 또는 비밀번호가 올바르지 않습니다.', 'error');
+                return;
+            }
+
+            // Save session
+            user.lastLogin = new Date().toLocaleString('ko-KR');
+            const idx = users.findIndex(u => u.id === id);
+            users[idx] = user;
+            localStorage.setItem('pf_users', JSON.stringify(users));
+            localStorage.setItem('pf_currentUser', JSON.stringify(user));
+
+            showMsg('로그인 성공! 마이페이지로 이동합니다.', 'success');
+            setTimeout(() => { location.href = 'mypage.html'; }, 800);
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const id = document.getElementById('signup-id').value.trim();
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const phone = document.getElementById('signup-phone').value.trim();
+            const pw = document.getElementById('signup-pw').value;
+
+            if (!/^[a-zA-Z0-9_]{3,20}$/.test(id)) {
+                showMsg('아이디는 영문, 숫자, 언더바만 사용 가능하며 3~20자이어야 합니다.', 'error');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('pf_users') || '[]');
+            if (users.find(u => u.id === id)) {
+                showMsg('이미 사용 중인 아이디입니다.', 'error');
+                return;
+            }
+
+            const newUser = {
+                id, name, email, phone, pw,
+                joinDate: new Date().toLocaleDateString('ko-KR'),
+                lastLogin: new Date().toLocaleString('ko-KR'),
+                role: 'Member'
+            };
+            users.push(newUser);
+            localStorage.setItem('pf_users', JSON.stringify(users));
+            localStorage.setItem('pf_currentUser', JSON.stringify(newUser));
+
+            showMsg('회원가입이 완료되었습니다! 마이페이지로 이동합니다.', 'success');
+            setTimeout(() => { location.href = 'mypage.html'; }, 900);
+        }
+
+        // If already logged in, redirect to mypage
+        if (localStorage.getItem('pf_currentUser')) {
             location.href = 'mypage.html';
-        });
+        }
     </script>
 </body>
 </html>

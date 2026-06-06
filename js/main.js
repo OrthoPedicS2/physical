@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSectionIdx = 0;
     let isScrollingLocked = false;
 
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth > 1024 && document.body.classList.contains('snap-scroll')) {
         window.addEventListener('wheel', (e) => {
             if (isScrollingLocked) return;
 
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sync index on manual scroll or nav click
     window.addEventListener('scroll', () => {
-        if (isScrollingLocked) return;
+        if (!document.body.classList.contains('snap-scroll') || isScrollingLocked) return;
         const currentPos = window.pageYOffset + (window.innerHeight / 3);
         fullSections.forEach((sec, i) => {
             if (currentPos >= sec.offsetTop && currentPos < sec.offsetTop + sec.offsetHeight) {
