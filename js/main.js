@@ -108,15 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Language Toggle
-    const langBtn = document.querySelector('.lang');
-    if (langBtn) {
-        langBtn.addEventListener('click', () => {
-            document.body.classList.toggle('lang-en');
-            const currentLang = document.body.classList.contains('lang-en') ? 'EN | KO' : 'KO | EN';
-            langBtn.innerText = currentLang;
-        });
-    }
+
 
     // Initial check
     reveal();

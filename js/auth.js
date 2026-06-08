@@ -292,23 +292,11 @@ function authUpdateHeader() {
                 </a>
                 <a href="mypage.html" class="hover:text-blue-500 transition-colors">나의 정보</a>
                 <div class="w-[1px] h-3 bg-current opacity-15"></div>
-                <button onclick="authLogout()" class="hover:text-red-500 transition-colors opacity-60 hover:opacity-100" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;">로그아웃</button>
-                <div class="w-[1px] h-3 bg-current opacity-15"></div>
-                <div class="flex items-center gap-2">
-                    <span class="text-blue-500 cursor-pointer">KO</span>
-                    <span class="opacity-15 text-[10px]">|</span>
-                    <span class="opacity-35 cursor-pointer hover:opacity-100">EN</span>
-                </div>`;
+                <button onclick="authLogout()" class="hover:text-red-500 transition-colors opacity-60 hover:opacity-100" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;">로그아웃</button>`;
         } else {
             utilLinks.innerHTML = `
                 <a href="#" onclick="authOpenModal('login');return false;" class="hover:text-blue-500 transition-colors">로그인</a>
-                <a href="#" onclick="authOpenModal('signup');return false;" class="hover:text-blue-500 transition-colors">회원가입</a>
-                <div class="w-[1px] h-3 bg-current opacity-15"></div>
-                <div class="flex items-center gap-2">
-                    <span class="text-blue-500 cursor-pointer">KO</span>
-                    <span class="opacity-15 text-[10px]">|</span>
-                    <span class="opacity-35 cursor-pointer hover:opacity-100">EN</span>
-                </div>`;
+                <a href="#" onclick="authOpenModal('signup');return false;" class="hover:text-blue-500 transition-colors">회원가입</a>`;
         }
     }
 

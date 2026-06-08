@@ -174,26 +174,7 @@ header.scrolled .divider {
     background: rgba(0, 0, 0, 0.1);
 }
 
-.lang-selector {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    font-weight: 700;
-}
 
-.lang-selector .active {
-    color: var(--accent-blue);
-}
-
-.lang-selector .sep {
-    opacity: 0.3;
-    font-size: 0.7rem;
-}
-
-.lang-selector .inactive {
-    opacity: 0.5;
-}
 
 .nav-toggle {
     cursor: pointer;
@@ -1037,18 +1018,7 @@ footer {
     transform: translateX(0);
 }
 
-/* Language Toggle Logic */
-[lang-content="en"] {
-    display: none;
-}
 
-body.lang-en [lang-content="en"] {
-    display: block;
-}
-
-body.lang-en [lang-content="ko"] {
-    display: none;
-}
 
 /* Login Page Styles */
 .login-wrap {
